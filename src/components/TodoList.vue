@@ -4,9 +4,17 @@
     <ul>
       <li 
         v-for="(item, indx) in tareas" 
-        :key="item.id" 
-        @click="cambiarSelected(item)">
+        :key="item.id">
+        <div
+          @click="cambiarSelected(item)"
+          >
         {{ item.text }}
+        </div>
+        
+        <div v-if="isEditing(indx) && isSelected(indx)">
+          <EditorTarea :textToEdit="item.text" :itemToEdit="item"/>
+        </div>
+
         <div>
           <span 
             @click="cambiarEstadoTarea(item)"
@@ -31,9 +39,13 @@
 
 <script> 
 import { mapGetters, mapState } from "vuex";
+import EditorTarea from '@/components/EditorTarea'
 
 export default {
   name: 'TodoList',
+  components: {
+    EditorTarea
+  },
 
   data() {
     return {
@@ -43,7 +55,7 @@ export default {
 
  computed: {
   ...mapState(['tareas']),
-  ...mapGetters(['isSelected']),
+  ...mapGetters(['isSelected', 'isEditing']),
 
 
  },
@@ -51,7 +63,7 @@ export default {
 
   methods: {
     editTarea(item) {
-      console.log('Editar Tarea', item)
+      this.$store.commit('changeToEditing', item)
     },
 
     deleteItem(item) {

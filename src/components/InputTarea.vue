@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2 class="text-center mt-5">Todo List</h2>
-
     <form @submit.prevent="addItem">
       <input v-model="newItemText" placeholder="Ingrese una tarea..." />
       <button class="btn btn-primary" type="submit">Enviar</button>
@@ -25,7 +23,7 @@ export default {
         addItem(){
             this.$store.commit('addItem', this.newItemText)
             this.newItemText = ''
-        }   
+        },  
 
     }
 }
