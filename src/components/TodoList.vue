@@ -4,8 +4,9 @@
     <ul>
       <li 
         v-for="(item, indx) in tareas" 
-        :key="item.id">
-        <div
+        :key="item.id"
+        :class="{inProcessTask: item.taskState==1, completedTask: item.taskState==2}">
+        <div :class="{lineInText: item.taskState==2}"
           @click="cambiarSelected(item)"
           >
         {{ item.text }}
@@ -57,7 +58,6 @@ export default {
   ...mapState(['tareas']),
   ...mapGetters(['isSelected', 'isEditing']),
 
-
  },
 
 
@@ -77,10 +77,10 @@ export default {
     },
 
     cambiarSelected(item) {
-      //console.log(this.isSelected(item))
+      //console.log(this.isEditing(item))
       this.$store.commit('changeSelected', item)
     },
-
+    
   },
 
 }
@@ -96,6 +96,19 @@ export default {
 
   .pointer {
     cursor: pointer;
+  }
+
+  .lineInText {
+    text-decoration:line-through;
+    background-color: #dedcdc;
+  }
+
+  .completedTask {
+    background-color: #dedcdc;
+  }
+
+  .inProcessTask {
+    background-color: #f5e617;
   }
 
   ul {
