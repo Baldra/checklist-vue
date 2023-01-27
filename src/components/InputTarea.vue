@@ -44,16 +44,24 @@ export default {
     margin-bottom: 11px;
 
   }
-  /*
-
-  input {
-    padding: 0.5rem;
-    flex-grow: 1;
-    margin-right: 1rem;
-    margin-bottom: 5px;
-  } */
 
     input {
-    width: 45%;
-  } 
+     width: 45%;
+     padding: 12px;
+     border: none;
+     border-radius: 4px;
+     outline: none;
+     box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.25); 
+     transition: all 0.3s ease-in-out; 
+    }
+
+    button {
+      /* background: linear-gradient(to bottom, #4CAF50, #3e8e41); */
+      box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.25);
+      font-family: 'Open Sans', sans-serif;
+      transition: all 0.3s ease-out;
+      border-radius: 15px;
+      height: 45px;
+    }
+
 </style>

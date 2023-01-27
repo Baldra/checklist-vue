@@ -44,15 +44,6 @@ export default {
 
 <style lang ="scss" scoped>
 
-   /* .form {
-    display: flex;  
-    align-items: center;  
-    margin-top: 0.5rem;
-    margin-left: 15%; 
-    margin-right: 15%; 
-    margin-bottom: 5px;  
-  }  */
-
   form{
     display:flex;
   }
@@ -62,6 +53,9 @@ export default {
     width: 100%;
     align-content: center;
     display: flex;
+    background: none;
+    border-radius: 7px;
+    border-color: rgb(0, 0, 0, 0.65);
   } 
 
 </style>

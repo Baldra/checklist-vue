@@ -6,7 +6,6 @@ export default createStore({
   },
 
   getters: {
-    tareas: state => state.tareas,
 
     isSelected: state => indx => {
       return state.tareas[indx].isSelected

@@ -1,5 +1,15 @@
 <template>
 
+<div
+  style="margin-left: 15%; margin-right: 15%; margin-bottom: 48px">
+
+  <span style="float: left; font-size: x-large; margin-left: 8%;"
+    >Tareas</span>
+  <span style="float: right; font-size: x-large;margin-right: 8%;"
+    >Estado</span>
+
+</div>
+
 <div class="scrollarea">
     <ul>
       <li 
@@ -17,15 +27,11 @@
           <EditorTarea :textToEdit="item.text" :itemToEdit="item"/>
         </div>
 
-        <!-- TODO: cambiar el color de los botones al cambia el estado de la tarea 
-            Armar un texto en el about sobre la pagina
-            Estilo mas moderno para los imput
-            agregar swall alert para eliminar  -->
-
         <div style="display: flex">
           <button
             @click="cambiarEstadoTarea(item)"
-            class="btn btn-primary buttonTaskState"
+            class="btn buttonTaskState"
+            :class="{inProcessTask: item.taskState==1, completedTask: item.taskState==2}"
             v-if="!isEditing(indx) && !isSelected(indx)">
             {{estadosDisponibles[item.taskState]}}
           </button>
@@ -48,6 +54,8 @@
 <script> 
 import { mapGetters, mapState } from "vuex";
 import EditorTarea from '@/components/EditorTarea'
+import Swal from "sweetalert2"
+
 
 export default {
   name: 'TodoList',
@@ -57,7 +65,7 @@ export default {
 
   data() {
     return {
-      estadosDisponibles: ['To-Do','En progreso','Finalizada'],
+      estadosDisponibles: ['To-Do','Iniciada','Finalizada'],
     }
   },
 
@@ -69,13 +77,22 @@ export default {
 
 
   methods: {
+
     editTarea(item) {
       this.$store.commit('changeToEditing', item)
     },
 
-    deleteItem(item) {
-      console.log('Tarea Eliminada', item.id)
-      this.$store.commit('removeItem', item)
+    async deleteItem(item) {
+
+      const {isConfirmed} = await Swal.fire({
+        title: 'Seguro que quiere eliminar?',
+        showDenyButton: true,
+        confirmButtonText: 'Si'
+
+      })
+      if(isConfirmed){
+        this.$store.commit('removeItem', item)
+      }
 
     },
 
@@ -84,7 +101,6 @@ export default {
     },
 
     cambiarSelected(item) {
-      //console.log(this.isEditing(item))
       this.$store.commit('changeSelected', item)
     },
 
@@ -96,8 +112,13 @@ export default {
 
 <style lang ="scss" scoped>
 
+  $toDoTaskColor: rgba(241,241,241,0.75);
+  $inProgresTaskkColor: rgb(245,230,23,0.75);
+  $finTaskColor: rgb(177, 177, 177,0.75);
+
+
   .scrollarea {
-    height: calc(100vh - 171px);
+    height: calc(100vh - 206px);
     overflow-y: auto;
     scroll-behavior: smooth; 
   }
@@ -127,19 +148,19 @@ export default {
 
   .lineInText {
     text-decoration:line-through;
-    background-color: #dedcdc;
   }
 
   .completedTask {
-    background-color: #dedcdc;
+    background-color: $finTaskColor;
   }
 
   .inProcessTask {
-    background-color: #f5e617;
+    background-color: $inProgresTaskkColor;
   }
   .buttonTaskState {
     margin-top: 5%;
     margin-bottom: 5%;
+    border-color: black;
   }
 
   ul {
@@ -155,14 +176,13 @@ export default {
     align-items: center;
     padding: 0% 5% 0% 3%;
     margin-bottom: 0.5rem;
-    background-color: rgba(241,241,241,0.75);
+    background-color: $toDoTaskColor;
     border-radius: 11px;
   }
-   button {
-    margin-left: 15px;
+
+  .btn{
+    --bs-btn-hover-border-color: black;
+    display: flex;
   } 
-  span{
-    margin-right: 50px;
-  }
 
 </style>

@@ -24,8 +24,8 @@
 }
 
 nav {
-  /* position: sticky;  */  /* mantiene el navbar fijo pero los elementos se ocultar detras al scrolear */
-  padding: 30px; 
+  padding: 30px;
+  padding-top: 5px; 
   top: 0;
   right: 0;
   left: 0;
@@ -37,7 +37,7 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #9e25f5;
 }
 
 .backgroundImage {
