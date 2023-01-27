@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <form @submit.prevent="editItem(this.item, this.editItemText)">
+  
+    <form @submit.prevent="editItem(this.item, this.editItemText)"
+        >
       <input v-model="editItemText" />
       <button
         class="btn btn-primary btn-sm" 
-        type="submit">
+        type="submit"
+        style="margin-left: 5px">
         <i class="fa fa-floppy-disk"></i>
       </button>
     </form>
   
-  </div>
+  
 </template>
 
 <script>
@@ -42,29 +44,24 @@ export default {
 
 <style lang ="scss" scoped>
 
- /*  .scrollarea {
-    height: calc(100vh - 115px);
-    overflow: scroll;
+   /* .form {
+    display: flex;  
+    align-items: center;  
+    margin-top: 0.5rem;
+    margin-left: 15%; 
+    margin-right: 15%; 
+    margin-bottom: 5px;  
+  }  */
+
+  form{
+    display:flex;
   }
 
-  .pointer {
-    cursor: pointer;
-  } */
 
-/*    form {
+    input {
+    width: 100%;
+    align-content: center;
     display: flex;
-    align-items: center; 
-    margin-top: 1rem;
-    margin-left: -65%;
-    margin-right: 40%;
-    margin-bottom: 5px;
+  } 
 
-  }
-
-   input {
-    padding: 0.5rem;
-    flex-grow: 3;
-    margin-right: 1rem;
-    margin-bottom: 5px;
-  }   */
 </style>

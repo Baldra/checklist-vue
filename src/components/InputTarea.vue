@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="addItem">
       <input v-model="newItemText" placeholder="Ingrese una tarea..." />
-      <button class="btn btn-primary" type="submit">Enviar</button>
+      <button class="btn btn-primary" type="submit" style="margin-left: 12px">Crear</button>
     </form>
   
   </div>
@@ -40,20 +40,20 @@ export default {
     cursor: pointer;
   }
 
-  form {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-    margin-left: 20%;
-    margin-right: 20%;
-    margin-bottom: 5px;
+   form {
+    margin-bottom: 11px;
 
   }
+  /*
 
   input {
     padding: 0.5rem;
     flex-grow: 1;
     margin-right: 1rem;
     margin-bottom: 5px;
-  }
+  } */
+
+    input {
+    width: 45%;
+  } 
 </style>

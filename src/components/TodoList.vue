@@ -6,27 +6,34 @@
         v-for="(item, indx) in tareas" 
         :key="item.id"
         :class="{inProcessTask: item.taskState==1, completedTask: item.taskState==2}">
-        <div :class="{lineInText: item.taskState==2}"
+        <div :class="{lineInText: item.taskState==2}" class="textoTarea"
           @click="cambiarSelected(item)"
+          v-if="!isEditing(indx)"
           >
         {{ item.text }}
         </div>
         
-        <div v-if="isEditing(indx) && isSelected(indx)">
+        <div v-if="isEditing(indx) && isSelected(indx)" class="componentEditor">
           <EditorTarea :textToEdit="item.text" :itemToEdit="item"/>
         </div>
 
-        <div>
-          <span 
+        <!-- TODO: cambiar el color de los botones al cambia el estado de la tarea 
+            Armar un texto en el about sobre la pagina
+            Estilo mas moderno para los imput
+            agregar swall alert para eliminar  -->
+
+        <div style="display: flex">
+          <button
             @click="cambiarEstadoTarea(item)"
-            class="pointer">
+            class="btn btn-primary buttonTaskState"
+            v-if="!isEditing(indx) && !isSelected(indx)">
             {{estadosDisponibles[item.taskState]}}
-          </span>
+          </button>
           <template v-if="isSelected(indx)">
-            <button class="btn btn-warning" @click="editTarea(item)">
+            <button class="btn btn-warning buttonTaskState" @click="editTarea(item)">
               <i class="fa fa-pen"></i>
             </button>
-            <button class="btn btn-danger" @click="deleteItem(item)">
+            <button class="btn btn-danger buttonTaskState" @click="deleteItem(item)">
               <i class="fa fa-trash"></i>
             </button>
           </template>
@@ -80,7 +87,7 @@ export default {
       //console.log(this.isEditing(item))
       this.$store.commit('changeSelected', item)
     },
-    
+
   },
 
 }
@@ -91,8 +98,28 @@ export default {
 
   .scrollarea {
     height: calc(100vh - 115px);
-    overflow: scroll;
+    overflow-y: auto;
   }
+
+  .textoTarea {
+    width: 88%;
+
+    text-align:left;
+  }
+
+  .componentEditor{
+    margin-right: 0px;
+    padding-right: 0px;
+    width: 80%;
+
+  }
+
+  @media only screen and (max-width: 1100px) {
+  .textoTarea {
+    width: 70%;
+  }
+}
+
 
   .pointer {
     cursor: pointer;
@@ -110,6 +137,10 @@ export default {
   .inProcessTask {
     background-color: #f5e617;
   }
+  .buttonTaskState {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
 
   ul {
     list-style: none;
@@ -122,13 +153,13 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 0% 5% 0% 3%;
     margin-bottom: 0.5rem;
-    background-color: #f1f1f1;
+    background-color: rgba(241,241,241,0.75);
   }
-  button {
+   button {
     margin-left: 15px;
-  }
+  } 
   span{
     margin-right: 50px;
   }
