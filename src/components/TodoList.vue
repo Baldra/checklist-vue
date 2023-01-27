@@ -97,8 +97,9 @@ export default {
 <style lang ="scss" scoped>
 
   .scrollarea {
-    height: calc(100vh - 115px);
+    height: calc(100vh - 171px);
     overflow-y: auto;
+    scroll-behavior: smooth; 
   }
 
   .textoTarea {
@@ -115,11 +116,10 @@ export default {
   }
 
   @media only screen and (max-width: 1100px) {
-  .textoTarea {
-    width: 70%;
+    .textoTarea {
+      width: 70%;
+    }
   }
-}
-
 
   .pointer {
     cursor: pointer;
@@ -156,6 +156,7 @@ export default {
     padding: 0% 5% 0% 3%;
     margin-bottom: 0.5rem;
     background-color: rgba(241,241,241,0.75);
+    border-radius: 11px;
   }
    button {
     margin-left: 15px;

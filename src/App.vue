@@ -1,11 +1,14 @@
 <template>
   <div class="backgroundImage">
 
-    <nav>
+    <nav class="backgroundImage">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav>
-    <router-view/>
+
+    <div>
+      <router-view/>
+    </div>
     
   </div>
 
@@ -21,7 +24,11 @@
 }
 
 nav {
-  padding: 30px;
+  /* position: sticky;  */  /* mantiene el navbar fijo pero los elementos se ocultar detras al scrolear */
+  padding: 30px; 
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
 nav a {
@@ -40,4 +47,5 @@ nav a.router-link-exact-active {
   background-attachment: fixed;
 
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2 class="text-center mt-5">To Do List</h2>
+    <h2 class="text-center">To Do List</h2>
 
     <InputTarea /> 
     <TodoList /> 
